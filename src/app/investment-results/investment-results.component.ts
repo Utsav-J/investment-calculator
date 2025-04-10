@@ -1,19 +1,14 @@
-import { Component, input, Input, Output } from '@angular/core';
-import { ResultData } from './investment-results.model';
-import { CurrencyPipe } from '@angular/common';
+import { Component, computed, input, Input, Output } from '@angular/core';
 import { InvestmentService } from '../investment.service';
 
 @Component({
   selector: 'app-investment-results',
-  standalone: true,
-  imports: [CurrencyPipe],
+  standalone: false,
   templateUrl: './investment-results.component.html',
   styleUrl: './investment-results.component.css'
 })
 export class InvestmentResultsComponent {
   constructor(private investmentService: InvestmentService){};
   
-  get results(){
-    return this.investmentService.resultData;
-  }
+  results = computed(()=> this.investmentService.resultData());
 }
